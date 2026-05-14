@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Despecho</title>
+    <style>
+        body {
+            overflow: auto;
+            padding-top: 5px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgb(47,13,92);
+            background: linear-gradient(90deg, rgba(47,13,92,1) 0%, rgba(9,9,121,1) 35%, rgba(66,3,106,1) 100%);
+            flex-direction: column;
+            text-align: center;
+        }
+        #quiz-container {
+            max-height: 95vh;
+            overflow-y: auto;
+            margin-top: 10px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            max-width: 500px;
+            font-size: 1.1em;
+        }
+        button {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            background-color: #7860ff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #402CB3;
+        }
+
+        .social-buttona {
+            background-color: #25D366;
+            color: white;
+            font-weight: bold;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-size: .8em;
+            margin: 5px;
+        }
+        .social-buttona:hover {
+            background-color: #128C7E;
+        }
+
+        .social-buttonb {
+            background-color: #3b5998;
+            color: white;
+            font-weight: bold;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-size: .8em;
+            margin: 5px;
+        }
+        .social-buttonb:hover {
+            background-color: #001855;
+        }
+
+        .social-buttonc {
+            background-color: #dd2a7b;
+            color: white;
+            font-weight: bold;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-size: .8em;
+            margin: 5px;
+        }
+        .social-buttonc:hover {
+            background-color: #8134AF;
+        }
+        
+        .chingonas-button {
+            background-color: #6200ea;
+            color: white;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .chingonas-button:hover {
+            background-color: #3700b3;
+        }
+        #progress {
+            margin-top: 25px;
+            color: #280189 !important;
+            font-weight: 500;
+        }
+        .cta-text {
+            color: #e91e63;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        hr {
+            border: none;
+            height: 2px;
+            background-color: #ff4081;
+            margin: 15px 0;
+        }
+        .chingonas-image {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 10px;
+        }
+        .result-image {
+            width: 150px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 0, 150, 0.7);
+            opacity: 0.7;
+            top: -10px;
+            animation: fall 9s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <img src="https://www.adrianagallardo.com/cdn/shop/files/Adriana-Gallardo-BLACK_200x@2x.png?v=1613501424" style="width: 30%">
+        <h3 id="question"></h3>
+        <div id="answers"></div>
+        <p id="progress"></p>
+    </div>
+
+    <script>
+         const quiz = [
+            { question: "1. ¿Qué haces después de terminar una relación?", answers: ["A) Glow up inmediato: gym, cabello, outfit, 💅", "B) Terapia, journaling y frases de amor propio 🧘‍♀️", "C) Revisar si publica indirectas 🤡"] },
+            { question: "2. ¿Qué tipo de canción escuchas después de una ruptura?", answers: ["A) Una donde le dicen hasta de lo que se va a petatear.", "B) Una donde el mensaje sea “gracias por irte, te deseo lo mejor”✨", "C) Una triste para sacarlo todo."] },
+            { question: "3. Tu ex sube foto con alguien más  ¿Qué haces?", answers: ["A) Le enseño la foto a mis amigas y digo: “yo sabía que iba a terminar con alguien así” 😒", "B) Me duele tantito, pero sigo con mi vida 💅", "C) Entro al perfil de la nueva, con una cuenta falsa solo para ver."] },
+            { question: "4. ¿Qué frase te representa más?", answers: ["A) “Nadie me vuelve a ver la cara.” 🔥", "B) “Lo que no me destruyó me puso más buena.” 💅", "C) “Estoy sanando, pero ando sensible.” 😭"] },
+            { question: "5. Si tu amiga vuelve con el tóxico, tú:", answers: ["A) Le dices: “ahí no es otra vez 🙄”", "B) La apoyas, pero le recuerdas su valor ✨", "C) Secretamente entiendes por qué volvió 😭"] },
+        ];
+        
+        const results = [
+            { title: "🔥 LA DESPECHADA ENFURECIDA 🔥", image: "https://mcpoe.github.io/testchingon/quizadriana.png", description: "<strong>Tu evento favorito es bloquear y desbloquear.</strong><br><br>Dices que ya lo superaste, pero si te mencionan su nombre se te activa el sistema nervioso.<br>Tu problema no es el despecho. Es que todavía quieres ganar la ruptura.<br><br><b>✨Frase oficial:</b><i>“No estoy ardida, solo decepcionada y peligrosa.”</i>" },
+            { title: "💅 LA “THANK YOU, NEXT”💅", image: "https://mcpoe.github.io/testchingon/quizninel.png", description: "<strong>Lloraste, sufriste… pero convertiste el dolor en glow up.</strong><br><br>Ahora tu ex es solo: desarrollo de personaje.<br><br><b>✨Frase oficial:</b><i>“Gracias por el trauma, me quedó increíble el crecimiento personal.”</i>" },
+            { title: "😭 LA DESPECHADA NOSTÁLGICA 😭", image: "https://mcpoe.github.io/testchingon/quizwendy.png", description: "<strong>Tú no sueltas rápido. Te aferras a los recuerdos, a los “qué hubiera pasado” y a las conversaciones imaginarias en la regadera. </strong><br><br>Tu corazón ya entendió… pero tu apego todavía no.<br><br><b>✨Frase oficial:</b><i>“Solo necesito una última explicación… probablemente.”</i>" }
+        ];
+
+        let currentQuestion = 0;
+        let score = [0, 0, 0];
+        let respuestasElegidas = []; // Almacena las respuestas del usuario
+
+        function loadQuestion() {
+            if (currentQuestion < quiz.length) {
+                document.getElementById("question").innerText = quiz[currentQuestion].question;
+                document.getElementById("answers").innerHTML = "";
+                document.getElementById("progress").innerText = `Pregunta ${currentQuestion + 1} de ${quiz.length}`;
+
+                quiz[currentQuestion].answers.forEach((answer, index) => {
+                    const btn = document.createElement("button");
+                    btn.innerText = answer;
+                    btn.onclick = () => {
+                        score[index]++;
+                        respuestasElegidas.push(answer); // Almacena la respuesta elegida
+                        currentQuestion++;
+                        loadQuestion();
+                    };
+                    document.getElementById("answers").appendChild(btn);
+                });
+            } else {
+                showForm();
+            }
+        }
+
+        function showForm() {
+            document.getElementById("quiz-container").innerHTML = `
+                <h3 style="color: #280189";>¡Ya casi sabemos el tipo de despechada que eres!</h3>
+                <p>Déjanos tus datos para enviarte tu resultado por correo y recibir contenido exclusivo de Adriana Gallardo.</p>
+                <form id="chingonaForm">
+                    <input style="width: 80%; height: 33px" type="text" id="nombre" placeholder="Nombre y Apellido" required><br><br>
+                    <input style="width: 80%; height: 33px" type="email" id="correo" placeholder="Correo electrónico" required><br><br>
+                    <input style="width: 80%; height: 33px" type="tel" id="telefono" placeholder="Teléfono"><br><br>
+                    <label  style="font-size: 14px;">
+                        <input type="checkbox" id="acepto"> Acepto recibir información de próximos eventos de Adriana Gallardo.
+                    </label><br><br>
+                    <button type="button" onclick="enviarDatos()">Ver mi resultado</button>
+                </form>
+            `;
+        }
+
+        function enviarDatos() {
+            const nombre = document.getElementById("nombre").value;
+            const correo = document.getElementById("correo").value;
+            const telefono = document.getElementById("telefono").value;
+            const acepto = document.getElementById("acepto").checked ? "Sí" : "No";
+
+            if (!nombre || !correo || !document.getElementById("acepto").checked) {
+                alert("Completa todos los campos y acepta los términos.");
+                return;
+            }
+
+            const resultadoIndex = score.indexOf(Math.max(...score));
+            const resultadoFinal = results[resultadoIndex].title;
+
+            const data = {
+                nombre,
+                correo,
+                telefono,
+                acepto,
+                respuesta1: respuestasElegidas[0],
+                respuesta2: respuestasElegidas[1],
+                respuesta3: respuestasElegidas[2],
+                respuesta4: respuestasElegidas[3],
+                respuesta5: respuestasElegidas[4],
+                resultadoFinal
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycbxpKGrBD37xqXInLCJBzHKaCKgA7D_GL4if5PYRpF2cEt3kwLDlhtCa6hqWmxgwENbAhQ/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(() => showResult(resultadoIndex))
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar los datos. Por favor, inténtalo de nuevo.');
+            });
+        }
+
+        function showResult(resultIndex) {
+            document.getElementById("quiz-container").innerHTML = `
+                <h3>¡Eres una ${results[resultIndex].title}!</h3>
+                <img src="${results[resultIndex].image}" alt="Resultado" class="result-image">
+                <p>¡Gracias por participar! Revisa tu correo para recibir tu resultado completo.</p>
+                <a href="https://www.adrianagallardo.com/pages/como-superar-una-separacion" target="_blank">
+                    <button>Conoce los talleres de Adriana</button>
+                </a>
+            `;
+            launchConfetti();
+        }
+
+        function launchConfetti() {
+            for (let i = 0; i < 100; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                document.body.appendChild(confetti);
+                setTimeout(() => { confetti.remove(); }, 9000);
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
