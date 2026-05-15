@@ -209,10 +209,16 @@
             const telefono = document.getElementById("telefono").value;
             const acepto = document.getElementById("acepto").checked ? "Sí" : "No";
 
-            if (!nombre || !correo || !document.getElementById("acepto").checked) {
-                alert("Completa todos los campos y acepta los términos.");
+            const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+                if (!emailValido) {
+                    alert("Por favor ingresa un correo electrónico válido.");
                 return;
-            }
+                }
+
+                if (!nombre || !correo || !document.getElementById("acepto").checked) {
+                    alert("Completa todos los campos y acepta los términos.");
+                return;
+                }
 
             const resultadoIndex = score.indexOf(Math.max(...score));
             const resultadoFinal = results[resultadoIndex].title;
