@@ -230,10 +230,9 @@
                 resultadoFinal
             };
 
-            fetch('https://script.google.com/macros/s/AKfycbzCxcRf4yAeATtROd4i8hc7zYccXzo8CL9H4vHwRdtU1SvX_yVm4-OrugadidJB-c-gfA/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbwn32GdIqOI8mnF8Kv_Jds7hTscY4noX65jV0S5-yTq7CSmG7nnq3Ayqv_fasN5nVnwJg/exec', {
                 method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify(data)
             })
             .then(() => showResult(resultadoIndex))
@@ -247,6 +246,7 @@
             document.getElementById("quiz-container").innerHTML = `
                 <h3>¡Eres una ${results[resultIndex].title}!</h3>
                 <img src="${results[resultIndex].image}" alt="Resultado" class="result-image">
+                <h3>¡Eres una ${results[resultIndex].description}!</h3>
                 <p>¡Gracias por participar! Revisa tu correo para recibir tu resultado completo.</p>
                 <a href="https://www.adrianagallardo.com/pages/como-superar-una-separacion" target="_blank">
                     <button>Conoce los talleres de Adriana</button>
