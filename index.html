@@ -95,7 +95,7 @@
         }
         #progress {
             margin-top: 25px;
-            color: #7D2A2A !important;
+            color: #706060 !important;
             font-weight: 500;
         }
         .cta-text {
@@ -115,7 +115,7 @@
             margin-top: 10px;
         }
         .result-image {
-            width: 150px;
+            width: 200px;
             height: auto;
             object-fit: cover;
             border-radius: 10px;
@@ -246,10 +246,10 @@
             document.getElementById("quiz-container").innerHTML = `
                 <img src="${results[resultIndex].image}" alt="Resultado" class="result-image">
                 <h3>¡Eres una ${results[resultIndex].title}!</h3>
-                <p>${results[resultIndex].description}!</p>
-                <p>¡Gracias por participar! Revisa tu correo para recibir tu resultado completo.</p>
+                <p>${results[resultIndex].description}</p>
+                <p style="font-size: 12px; color: #706060">¡Gracias por participar! Revisa tu correo para recibir tu resultado completo.</p>
                 <a href="https://www.adrianagallardo.com/pages/como-superar-una-separacion" target="_blank">
-                    <button>Conoce los talleres de Adriana</button>
+                    <button>HAZ CLIC AQUÍ Y DESCUBRE UNA NOCHE PARA TI</button>
                 </a>
             `;
             launchConfetti();
